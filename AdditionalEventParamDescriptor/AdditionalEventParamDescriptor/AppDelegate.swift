@@ -55,3 +55,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
 }
 
+class ViewController: NSViewController {
+    
+    @IBAction func openFiles(sender: NSButton) {
+        let openPanel = NSOpenPanel()
+        guard openPanel.runModal() != .cancel else {
+            return
+        }
+        (NSApplication.shared.delegate as! AppDelegate).open(urls: openPanel.urls)
+    }
+    
+}
