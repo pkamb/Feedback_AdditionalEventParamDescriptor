@@ -42,16 +42,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func handle(event: NSAppleEventDescriptor?, replyEvent: NSAppleEventDescriptor?) {
         guard let event = event else {
-                return
+            print("event not found!")
+            return
         }
         print(event)
         
         guard let additionalEvent = event.paramDescriptor(forKeyword: keyAEPropData) else {
+            print("event for additionalEventParamDescriptor: not found!")
             return
         }
         print(additionalEvent)
         
         guard let directObject = additionalEvent.paramDescriptor(forKeyword: keyDirectObject) else {
+            print("direct object of additionalEventParamDescriptor: not found!")
             return
         }
         print(directObject)
