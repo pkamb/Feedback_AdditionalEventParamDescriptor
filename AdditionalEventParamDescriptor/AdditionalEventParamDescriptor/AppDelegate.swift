@@ -107,6 +107,7 @@ class ViewController: NSViewController {
     @IBAction func openFiles(sender: NSButton) {
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = true
+        openPanel.canChooseDirectories = true
         guard openPanel.runModal() != .cancel else {
             return
         }
