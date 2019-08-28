@@ -268,6 +268,7 @@
 				CODE_SIGN_ENTITLEMENTS = AdditionalEventParamDescriptor/AdditionalEventParamDescriptor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = LFL6DAHN8T;
 				INFOPLIST_FILE = AdditionalEventParamDescriptor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -287,6 +288,7 @@
 				CODE_SIGN_ENTITLEMENTS = AdditionalEventParamDescriptor/AdditionalEventParamDescriptor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = LFL6DAHN8T;
 				INFOPLIST_FILE = AdditionalEventParamDescriptor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
