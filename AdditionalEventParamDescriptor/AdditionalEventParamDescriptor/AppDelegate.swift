@@ -123,8 +123,4 @@ extension FourCharCode: ExpressibleByStringLiteral {
         self = value.utf8.reduce(0, {$0 << 8 + FourCharCode($1)} )
     }
     
-    func stringValue() -> String {
-        NSFileTypeForHFSTypeCode(self).replacingOccurrences(of: "\'", with: "")
-    }
-    
 }
