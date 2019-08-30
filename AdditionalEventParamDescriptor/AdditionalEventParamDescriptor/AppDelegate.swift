@@ -82,6 +82,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
          */
         
         guard let additionalEvent = event.paramDescriptor(forKeyword: keyAEPropData) else {
+            
+            /*
+             * ##################################################################
+             * Put a breakpoint here! This is the bug. `additionalEventParamDescriptor:` parameter was not passed.
+             * ##################################################################
+             */
+            
             print("event for additionalEventParamDescriptor: not found!")
             return
         }
@@ -96,6 +103,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         print(directObject)
+        
+        /*
+         * ##################################################################
+         * In this case, the `additionalEventParamDescriptor:` Apple Event was passed correctly.
+         * ##################################################################
+         */
         
         print("additionalEventParamDescriptor: Apple Event was passed and handled correctly :)")
     }
