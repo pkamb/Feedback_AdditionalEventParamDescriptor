@@ -709,9 +709,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F72-Bk-SCK">
-                                <rect key="frame" x="96" y="117" width="288" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="F72-Bk-SCK">
+                                <rect key="frame" x="96" y="222" width="288" height="32"/>
                                 <buttonCell key="cell" type="push" title="Open Files + send additional Apple Event" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kTT-4y-UnU">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -720,7 +719,28 @@
                                     <action selector="openFilesWithSender:" target="XfG-lQ-9wD" id="zoO-Ee-2so"/>
                                 </connections>
                             </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="CiO-LR-U1r">
+                                <rect key="frame" x="18" y="20" width="444" height="192"/>
+                                <textFieldCell key="cell" selectable="YES" id="HlR-WL-VDt">
+                                    <font key="font" metaFont="system"/>
+                                    <mutableString key="title">This app uses NSWorkspace `open( ... )` to open URLs and send an additional Apple Event via `additionalEventParamDescriptor:`.
+
+Put breakpoints in the failure conditions of the Apple Event handler.
+
+Then use the button above to select a random assortment of files.  Some URLs will be handled perfectly, and the custom Apple Event passed intact. For other URLs, the Apple Event will be stripped out.  Directories always seem to pass the Apple Event. File URLs either work correctly or fail, and it is unclear why.</mutableString>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="CiO-LR-U1r" firstAttribute="top" secondItem="F72-Bk-SCK" secondAttribute="bottom" constant="17" id="LoY-px-qPq"/>
+                            <constraint firstItem="F72-Bk-SCK" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="Oe7-Iv-yUo"/>
+                            <constraint firstAttribute="trailing" secondItem="CiO-LR-U1r" secondAttribute="trailing" constant="20" id="p8I-R7-FUc"/>
+                            <constraint firstAttribute="bottom" secondItem="CiO-LR-U1r" secondAttribute="bottom" constant="20" id="s87-EA-IZM"/>
+                            <constraint firstItem="F72-Bk-SCK" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="xy6-iO-q2p"/>
+                            <constraint firstItem="CiO-LR-U1r" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="ybj-fG-rOZ"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
