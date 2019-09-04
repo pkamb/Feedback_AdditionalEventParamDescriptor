@@ -27,9 +27,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                                      andEventID: AEEventID(kAEOpenDocuments))
     }
     
+    let appleEventText = "MY_CUSTOM_APPLE_EVENT"
+    
     func open(urls: [URL]) {
         
-        let additionalEvent = NSAppleEventDescriptor(string: "MY_CUSTOM_APPLE_EVENT")
+        let additionalEvent = NSAppleEventDescriptor(string: appleEventText)
         
         /*
          * Open the URLs, passing the `additionalEventParamDescriptor:` Apple Event
@@ -70,7 +72,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             print(additionalEvent)
             
-            print("additionalEventParamDescriptor: Apple Event was passed and handled correctly :)")
+            if  additionalEvent.stringValue == appleEventText {
+                print("additionalEventParamDescriptor: Apple Event was passed and handled correctly :)")
+            } else {
+                print("additionalEventParamDescriptor: Apple Event was found, but contained the wrong value...?")
+            }
         } else {
             
             /*
