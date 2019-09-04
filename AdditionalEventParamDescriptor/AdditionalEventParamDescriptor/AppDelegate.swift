@@ -29,27 +29,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func open(urls: [URL]) {
         
-        /*
-         * Create an event to be passed as the `additionalEventParamDescriptor:`
-         * of the NSWorkspace `open(urls: ...)` function call.
-         */
-        
-        let additionalEvent = NSAppleEventDescriptor(eventClass:       AEEventClass(kCoreEventClass),
-                                                     eventID:          AEEventID(kAEOpenDocuments),
-                                                     targetDescriptor: NSAppleEventDescriptor(bundleIdentifier: Bundle.main.bundleIdentifier!),
-                                                     returnID:         AEReturnID(kAutoGenerateReturnID),
-                                                     transactionID:    AETransactionID(kAnyTransactionID))
+        let additionalEvent = NSAppleEventDescriptor(string: "MY_CUSTOM_APPLE_EVENT")
         
         /*
-         * Set your custom data as an Apple Event packed into the `directObject`
-         * of the `additionalEventParamDescriptor:` event.
-         */
-        
-        let directObject = NSAppleEventDescriptor(string: "MY_CUSTOM_APPLE_EVENT")
-        additionalEvent.setDescriptor(directObject, forKeyword: keyDirectObject)
-        
-        /*
-         * Open the URLs, passing the `additionalEventParamDescriptor:`
+         * Open the URLs, passing the `additionalEventParamDescriptor:` Apple Event
          */
         
         NSWorkspace.shared.open(urls,
@@ -70,47 +53,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
          * that additional event should be merged with the system event.
          */
         
-        guard let event = event else {
-            print("event not found!")
-            return
-        }
+        guard let event = event else { fatalError() }
         print(event)
         
         /*
          * This Apple Event **should** also contain the `additionalEventParamDescriptor:` Apple Event.
-         * The additional event should be merged into this event under the key keyAEPropData / 'prdt'.
+         * The additional event should be added to the system event under the key keyAEPropData / 'prdt'.
          */
         
-        guard let additionalEvent = event.paramDescriptor(forKeyword: keyAEPropData) else {
+        if let additionalEvent = event.paramDescriptor(forKeyword: keyAEPropData) {
+            /*
+             * ##################################################################
+             * In this case, the `additionalEventParamDescriptor:` Apple Event was passed correctly.
+             * ##################################################################
+             */
+            
+            print(additionalEvent)
+            
+            print("additionalEventParamDescriptor: Apple Event was passed and handled correctly :)")
+        } else {
             
             /*
              * ##################################################################
-             * Put a breakpoint here! This is the bug. `additionalEventParamDescriptor:` parameter was not passed.
+             * Put a breakpoint here! This is the bug.
+             * `additionalEventParamDescriptor:` parameter was not passed.
              * ##################################################################
              */
             
             print("event for additionalEventParamDescriptor: not found!")
-            return
         }
-        print(additionalEvent)
         
-        /*
-         * We set the custom-data Apple Event as the direct object of the additional event.
-         */
-        
-        guard let directObject = additionalEvent.paramDescriptor(forKeyword: keyDirectObject) else {
-            print("direct object of additionalEventParamDescriptor: not found!")
-            return
-        }
-        print(directObject)
-        
-        /*
-         * ##################################################################
-         * In this case, the `additionalEventParamDescriptor:` Apple Event was passed correctly.
-         * ##################################################################
-         */
-        
-        print("additionalEventParamDescriptor: Apple Event was passed and handled correctly :)")
     }
     
 }
